@@ -7,7 +7,8 @@ if ('serviceWorker' in navigator) {
 }
 
 const tasks = [
-    "bike 10km",
+    "bike 20km",
+    "do as much pull ups as you can",
     "do 300 push ups",
     "write a story",
     "app 5 different people",
@@ -15,6 +16,8 @@ const tasks = [
     "walk 5km",
     "watch a looooong tutorial video",
     "take a shower",
+    "watch a movie",
+    "run 10km",
     "learn something new",
     "make a programming project / start with coding",
     "start learning a new language",
@@ -27,6 +30,7 @@ const tasks = [
     "go to a location to take photos",
     "make a story with 1000+ words",
     "star this GitHub: 'https://github.com/heegarthur/ivoarthur' ",
+    "check my other github repo's",
     "eat/drink something",
     "make food that you have never made before"
 ];
