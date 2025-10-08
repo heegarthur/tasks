@@ -3,12 +3,11 @@ if ('serviceWorker' in navigator) {
         console.log("Service Worker geregistreerd!");
     }).catch(err => {
         console.error("Service Worker registratie mislukt:", err);
-    }); 
+    });
 }
 
 const tasks = [
-    "bike 20km",
-    "do as much pull ups as you can",
+    "bike 10km",
     "do 300 push ups",
     "write a story",
     "app 5 different people",
@@ -16,8 +15,6 @@ const tasks = [
     "walk 5km",
     "watch a looooong tutorial video",
     "take a shower",
-    "watch a movie",
-    "run 10km",
     "learn something new",
     "make a programming project / start with coding",
     "start learning a new language",
@@ -29,29 +26,38 @@ const tasks = [
     "100 push ups",
     "go to a location to take photos",
     "make a story with 1000+ words",
-    "star this GitHub: 'https://github.com/heegarthur/ivoarthur' ",
-    "check my other github repo's",
+    "star this GitHub: 'https://github.com/heegarthur/learnzone'\nand this one: 'https://github.com/heegarthur/tasks' ",
     "eat/drink something",
-    "make food that you have never made before"
+    "make food that you have never made before",
+    "meditate for 10 minutes",
+    "write a story",
+    "make a list about things",
+    "draw something from a song",
+    "discover a new music genre",
+    "try to find abondoned places",
+    "try to animate",
+    "learn to edit",
+    "learn a skill (you can choose) that has nothing to to with school or sport",
+    "train for arm wrestling",
+    "study something (you can choose everything)"
 ];
 
-let timeInSeconds = 3600; // Standaard 1 uur
+let timeInSeconds = 3600;
 const timerElement = document.getElementById("timer");
 const startButton = document.getElementById("startButton");
 const taskElement = document.getElementById("task");
 let countdown;
-let isPaused = false;
+let isPaused = true;
 
 startButton.addEventListener("click", () => {
-    clearInterval(countdown); // Stop de vorige timer volledig
-    timeInSeconds = 1 * 3600; // Zet de timer terug op 1 uur
-    sessionStorage.setItem('timeLeft', timeInSeconds); // Opslaan in sessionStorage
-    
-    // Random taak kiezen
+    clearInterval(countdown); 
+    timeInSeconds = 1 * 3600; 
+    sessionStorage.setItem('timeLeft', timeInSeconds); 
+
     const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
     taskElement.textContent = randomTask;
 
-    startCountdown(); // Start de nieuwe timer
+    startCountdown(); 
 });
 
 
@@ -62,12 +68,13 @@ function startCountdown() {
             const seconds = timeInSeconds % 60;
 
             timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            
+
             if (timeInSeconds <= 0) {
                 clearInterval(countdown);
                 timerElement.textContent = "Time is up!";
                 taskElement.textContent = "Task completed?";
                 console.log("Done?");
+                alert("timer!!!")
             } else {
                 timeInSeconds--;
                 localStorage.setItem("remainingTime", timeInSeconds);
@@ -79,7 +86,7 @@ function startCountdown() {
 function pausebuttonc() {
     isPaused = !isPaused;
     const pauseButton = document.getElementById("pause");
-    pauseButton.textContent = isPaused ? "▶" : "||";
+    pauseButton.textContent = isPaused ? "||" : "▶";
     sessionStorage.setItem('pause', isPaused ? 'pause' : 'play');
 }
 
@@ -89,6 +96,7 @@ navigator.serviceWorker.addEventListener('message', event => {
     }
 });
 window.onload = function () {
+
     const savedTime = sessionStorage.getItem('timeLeft');
     if (savedTime) {
         timeInSeconds = parseInt(savedTime, 10);
